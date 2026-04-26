@@ -3,18 +3,24 @@
 const express = require("express");
 const cors = require("cors");
 
+// 🔹 Routes import
+const chatRoutes = require("./routes/chatRoutes");
+
 const app = express();
 
-// Middlewares
+// 🔹 Middlewares
 app.use(cors());
 app.use(express.json());
 
-// Basic route
+// 🔹 Health check
 app.get("/", (req, res) => {
   res.send("AI Chatbot API Running...");
 });
 
-// Server start
+// 🔹 Routes connect (IMPORTANT)
+app.use("/api/chat", chatRoutes);
+
+// 🔹 Server start
 const PORT = 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
